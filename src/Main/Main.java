@@ -15,7 +15,7 @@ public class Main{
 	public static Queue<Vector2D> vecs2 = new LinkedList<>();
 	public static Color c = new Color(44, 169, 222);
 	public static Vector2D currentVec = new Vector2D(-100, -100);
-	public static stopWatchX time = new stopWatchX(50);
+	public static stopWatchX time = new stopWatchX(15);
 	// End Static fields...
 	
 	public static void main(String[] args) {
@@ -35,7 +35,7 @@ public class Main{
 	/* This is your access to the "game loop" (It is a "callback" method from the Control class (do NOT modify that class!))*/
 	public static void update(Control ctrl) {
 		// TODO: This is where you can code! (Starting code below is just to show you how it works)
-		ctrl.addSpriteToFrontBuffer(currentVec.getX(), currentVec.getY(), "f1");				// Add a tester sprite to render list by tag (Remove later! Test only!)
+		ctrl.addSpriteToFrontBuffer(currentVec.getX(), currentVec.getY(), "f2");				// Add a tester sprite to render list by tag (Remove later! Test only!)
 		if(time.isTimeUp()) {
 			if(!vecs1.isEmpty()) {
 				currentVec = vecs1.remove();
@@ -50,7 +50,7 @@ public class Main{
 		}
 		
 		
-		ctrl.drawString(970, 640, "Joseph Mathew Sagum", c);		// Test drawing text on screen where you want (Remove later! Test only!)
+		ctrl.drawString(970, 640, "Joseph Mathew Sagum", c);		
 	}
 	
 	// Additional Static methods below...(if needed)
