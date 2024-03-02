@@ -26,7 +26,7 @@ public class Main{
 	/* This is your access to things BEFORE the game loop starts */
 	public static void start(){
 		// TODO: Code your starting conditions here...NOT DRAW CALLS HERE! (no addSprite or drawString)
-		for(int x = -100; x <= 1408; x += 8) {
+		for(int x = -100; x <= 1280; x += 8) {
 			vecs1.add(new Vector2D(x, 300));
 		}
 		
@@ -35,6 +35,9 @@ public class Main{
 	/* This is your access to the "game loop" (It is a "callback" method from the Control class (do NOT modify that class!))*/
 	public static void update(Control ctrl) {
 		// TODO: This is where you can code! (Starting code below is just to show you how it works)
+	 
+			ctrl.drawString(100, 500, "" + vecs1.size(), Color.blue);
+			ctrl.drawString(100, 550, "" + vecs2.size(), Color.blue);
 		ctrl.addSpriteToFrontBuffer(currentVec.getX(), currentVec.getY(), "f2");				// Add a tester sprite to render list by tag (Remove later! Test only!)
 		if(time.isTimeUp()) {
 			if(!vecs1.isEmpty()) {
