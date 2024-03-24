@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 import Data.Sprite;
+import Data.Vector2D;
 import Data.gameString;
 import FileIO.EZFileRead;
 import Graphics.Graphic;
@@ -109,5 +110,10 @@ public class Control{
 		int x1 = (int) p.getX();
 		int y1 = (int) p.getY();
 		return "X: " + x1 + " , Y: " + y1;
+	}
+
+	public void addSpriteToFrontBuffer(Vector2D coords, String tag) {
+		// TODO Auto-generated method stub
+		
 	}
 }

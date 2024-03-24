@@ -1,3 +1,5 @@
-Art/f.png*f0
-Art/headSprite.png*f1
-Art/headSprite2.png*f2
+Art/f.png*Persephone
+Art/headSprite1.png*f0
+Art/headSprite2.png*f1
+Art/headSprite3.png*f2
+Art/headSprite4.png*f3
