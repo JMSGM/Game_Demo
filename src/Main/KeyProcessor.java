@@ -12,8 +12,14 @@ public class KeyProcessor{
 	
 	// Static Method(s)
 	public static void processKey(char key){
-		if(key == ' ')				return;
+		if(key == ' '){
+			
+			Main.isKeyDown = false;	
+			return;
+			}
 		// Debounce routine below...
+		
+		
 		if(key == last)
 			if(sw.isTimeUp() == false)			return;
 		last = key;
@@ -24,7 +30,26 @@ public class KeyProcessor{
 		case '%':								// ESC key
 			System.exit(0);
 			break;
-			
+		case 'a':
+			Main.isKeyDown = true;
+			Main.trigger = "a is triggered";	
+			break;
+		case 'w':
+			Main.isKeyDown = true;
+			Main.trigger = "w is triggered";
+			break;
+		case 's':
+			Main.isKeyDown = true;
+			Main.trigger = "s is triggered";
+			break;
+		case 'd':
+			 Main.isKeyDown = true;
+			Main.trigger = "d is triggered";
+			break;
+		case '$':
+			 Main.isKeyDown = true;
+			Main.trigger = "space is triggered";
+			break;
 		case 'm':
 			// For mouse coordinates
 			Control.isMouseCoordsDisplayed = !Control.isMouseCoordsDisplayed;

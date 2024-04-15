@@ -3,3 +3,5 @@ Art/headSprite1.png*f0
 Art/headSprite2.png*f1
 Art/headSprite3.png*f2
 Art/headSprite4.png*f3
+Art/headSprite.png*f
+Art/spaceBackground.png*drop

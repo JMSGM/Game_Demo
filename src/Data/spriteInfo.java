@@ -17,12 +17,12 @@ public class spriteInfo {
 	// Methods
 	public String getTag(){
 		// TODO: Remove my placeholder code below (which is there to prevent an error) and replace it with returning the value of your private field tag
-		return tag;
+		return this.tag;
 	}
 	
 	public Vector2D getCoords(){
 		// TODO: Remove my placeholder code below (which is there to prevent an error) and replace it with returning the value of your private field v2d
-		return v2d;
+		return this.v2d;
 	}
 	
 	public void setTag(String newTag){
