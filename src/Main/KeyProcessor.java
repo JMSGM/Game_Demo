@@ -13,7 +13,8 @@ public class KeyProcessor{
 	// Static Method(s)
 	public static void processKey(char key){
 		if(key == ' '){
-			
+			Main.isSKeyDown = false;
+			Main.isDKeyDown = false;
 			Main.isKeyDown = false;	
 			return;
 			}
@@ -32,6 +33,7 @@ public class KeyProcessor{
 			break;
 		case 'a':
 			Main.isKeyDown = true;
+			Main.isSKeyDown = true;
 			Main.trigger = "a is triggered";	
 			break;
 		case 'w':
@@ -43,7 +45,8 @@ public class KeyProcessor{
 			Main.trigger = "s is triggered";
 			break;
 		case 'd':
-			 Main.isKeyDown = true;
+	
+			Main.isDKeyDown = true;
 			Main.trigger = "d is triggered";
 			break;
 		case '$':
