@@ -31,8 +31,9 @@ public class Main{
 	public static String trigger = "";
 	public static boolean isKeyDown = false;
 	public static boolean isDKeyDown = false;
-	public static boolean isSKeyDown = false;
-	
+	public static boolean isAKeyDown = false;
+	public static boolean wasDKeyDown = false;
+	public static boolean wasAKeyDown = false;
 	// End Static fields...
 	
 	public static void main(String[] args) {
@@ -70,22 +71,29 @@ public class Main{
 		
 	/* This is your access to the "game loop" (It is a "callback" method from the Control class (do NOT modify that class!))*/
 	public static void update(Control ctrl) {
-		// TODO: This is where you can code! (Starting code below is just to show you how it works)
+	
+		//Misc
 		String vinnyLine = map.get("line2");
-		ctrl.addSpriteToFrontBuffer(0, 0, "f");
+		ctrl.addSpriteToFrontBuffer(0, 0, "drop");
 		ctrl.addSpriteToFrontBuffer(100, 100, "f1");
 		ctrl.drawString(970, 640, "Joseph Mathew Sagum", c);
 		
-		//KeyB control logic
 		spriteInfo si = sprites.get(currentSpriteIndex);
 		spriteInfo si2 = sprites2.get(currentSpriteIndex);
-		if(isDKeyDown == true)
+		int end = sprites2.size()-1;
+		
+		//input logic
+		if(wasAKeyDown == false && wasDKeyDown == true)
 		ctrl.addSpriteToFrontBuffer(si.getCoords().getX() , si.getCoords().getY() , si.getTag());
-		if(isSKeyDown == true)
+		if(wasAKeyDown == true && wasDKeyDown == false)
 		ctrl.addSpriteToFrontBuffer(si2.getCoords().getX() , si2.getCoords().getY() , si2.getTag());
 		
+		
+		//Right Direction
 		if(isDKeyDown == true) {
 		ctrl.drawString(150, 250, trigger, c);
+		
+		
 		if(time.isTimeUp()) {
 			currentSpriteIndex++;
 			if(currentSpriteIndex >= sprites.size()) {
@@ -95,16 +103,18 @@ public class Main{
 		}	
 		ctrl.drawString(970, 640, "Joseph Mathew Sagum", c);	
 		}
-		if(isSKeyDown == true) {
+		//Left Direction
+		if(isAKeyDown == true) {
 			ctrl.drawString(150, 250, trigger, c);
 			if(time.isTimeUp()) {
 				currentSpriteIndex  = currentSpriteIndex - 1;
 				if(currentSpriteIndex <= 0) {
-				currentSpriteIndex = 0;
+				currentSpriteIndex = end;
 				} 
 				time.resetWatch();	
 			}	
 		}
+
 	}
 	
 	// Additional Static methods below...(if needed)
