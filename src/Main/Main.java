@@ -17,23 +17,33 @@ import timer.stopWatchX;
 
 public class Main{
 	// Fields (Static) below...
+	//Misc
 	public static Queue<Vector2D> vecs1 = new LinkedList<>();
 	public static Queue<Vector2D> vecs2 = new LinkedList<>();
 	public static Color c = new Color(44, 169, 222);
 	public static Vector2D currentVec = new Vector2D(-100, -100);
-	public static stopWatchX time = new stopWatchX(60);
+	public static stopWatchX time = new stopWatchX(15);
+	//Where Sprite animation is stored
 	public static ArrayList<spriteInfo> sprites = new ArrayList<>();
 	public static ArrayList<spriteInfo> sprites2 = new ArrayList<>();
-
-	public static int currentSpriteIndex = 0;
+	public static ArrayList<spriteInfo> sprites3 = new ArrayList<>();
+	public static ArrayList<spriteInfo> sprites4 = new ArrayList<>();
+	public static int currentSpriteIndex = 50;
+	public static int currentSpriteIndex2 = 30;
+	//In-game text
 	public static EZFileRead ezr = new EZFileRead("VinnyDialog.txt");
 	public static HashMap<String, String> map = new HashMap<>();
+	//KeyProcessor booleans
 	public static String trigger = "";
-	public static boolean isKeyDown = false;
+	public static boolean isWKeyDown = false;
 	public static boolean isDKeyDown = false;
 	public static boolean isAKeyDown = false;
+	public static boolean isSKeyDown = false;
+	
+	public static boolean wasWKeyDown = false;
 	public static boolean wasDKeyDown = false;
 	public static boolean wasAKeyDown = false;
+	public static boolean wasSKeyDown = true;
 	// End Static fields...
 	
 	public static void main(String[] args) {
@@ -57,6 +67,20 @@ public class Main{
             sprites2.add(new spriteInfo(new Vector2D(x + 16, 300), "Lf2"));
             sprites2.add(new spriteInfo(new Vector2D(x + 24, 300), "Lf3"));
 		}
+		for(int y = -100; y <= 720; y += 32) {
+            sprites3.add(new spriteInfo(new Vector2D(300 , y), "Ff0"));
+            sprites3.add(new spriteInfo(new Vector2D(300, y + 8), "Ff1"));
+            sprites3.add(new spriteInfo(new Vector2D(300, y + 16), "Ff2"));
+            sprites3.add(new spriteInfo(new Vector2D(300, y + 24), "Ff1"));
+		}
+		for(int y = -100; y <= 720; y += 32) {
+            sprites4.add(new spriteInfo(new Vector2D(300 , y), "Bf0"));
+            sprites4.add(new spriteInfo(new Vector2D(300, y + 8), "Bf1"));
+            sprites4.add(new spriteInfo(new Vector2D(300, y + 16), "Bf2"));
+            sprites4.add(new spriteInfo(new Vector2D(300, y + 24), "Bf1"));
+		}
+		
+		//Hashmap for in-game text
 		System.out.println(sprites.size());
 		for (int i = 0; i < ezr.getNumLines(); i++) {
 		String raw = ezr.getLine(i);
@@ -77,31 +101,33 @@ public class Main{
 		ctrl.addSpriteToFrontBuffer(0, 0, "drop");
 		ctrl.addSpriteToFrontBuffer(100, 100, "f1");
 		ctrl.drawString(970, 640, "Joseph Mathew Sagum", c);
-		
+		ctrl.drawString(800, 250, vinnyLine, c);
 		spriteInfo si = sprites.get(currentSpriteIndex);
 		spriteInfo si2 = sprites2.get(currentSpriteIndex);
-		int end = sprites2.size()-1;
+		spriteInfo si3 = sprites3.get(currentSpriteIndex2);
+		spriteInfo si4 = sprites4.get(currentSpriteIndex2);
 		
+
 		//input logic
-		if(wasAKeyDown == false && wasDKeyDown == true)
-		ctrl.addSpriteToFrontBuffer(si.getCoords().getX() , si.getCoords().getY() , si.getTag());
-		if(wasAKeyDown == true && wasDKeyDown == false)
-		ctrl.addSpriteToFrontBuffer(si2.getCoords().getX() , si2.getCoords().getY() , si2.getTag());
-		
+		if(wasWKeyDown == false && wasAKeyDown == false && wasSKeyDown == false && wasDKeyDown == true)
+		ctrl.addSpriteToFrontBuffer(si.getCoords().getX() , si3.getCoords().getY() , si.getTag());
+		if(wasWKeyDown == false && wasAKeyDown == true && wasSKeyDown == false && wasDKeyDown == false)
+		ctrl.addSpriteToFrontBuffer(si2.getCoords().getX() , si3.getCoords().getY() , si2.getTag());
+		if(wasWKeyDown == false && wasAKeyDown == false && wasSKeyDown == true && wasDKeyDown == false)
+		ctrl.addSpriteToFrontBuffer(si.getCoords().getX() , si3.getCoords().getY() , si3.getTag());
+		if(wasWKeyDown == true && wasAKeyDown == false && wasSKeyDown == false && wasDKeyDown == false)
+		ctrl.addSpriteToFrontBuffer(si.getCoords().getX() , si4.getCoords().getY() , si4.getTag());
 		
 		//Right Direction
 		if(isDKeyDown == true) {
 		ctrl.drawString(150, 250, trigger, c);
-		
-		
 		if(time.isTimeUp()) {
 			currentSpriteIndex++;
 			if(currentSpriteIndex >= sprites.size()) {
 			currentSpriteIndex = 0;
-			} 
-			time.resetWatch();	
-		}	
-		ctrl.drawString(970, 640, "Joseph Mathew Sagum", c);	
+				} 
+				time.resetWatch();
+			}			
 		}
 		//Left Direction
 		if(isAKeyDown == true) {
@@ -109,12 +135,37 @@ public class Main{
 			if(time.isTimeUp()) {
 				currentSpriteIndex  = currentSpriteIndex - 1;
 				if(currentSpriteIndex <= 0) {
-				currentSpriteIndex = end;
+				currentSpriteIndex = sprites.size() - 1;
 				} 
 				time.resetWatch();	
 			}	
 		}
-
+		//Forward Direction
+		if(isSKeyDown == true) {
+		ctrl.drawString(150, 250, trigger, c);
+		if(time.isTimeUp()) {
+			currentSpriteIndex2++;
+			if(currentSpriteIndex2 >= sprites3.size()-1) {
+			currentSpriteIndex2 = 0;
+			} 
+			time.resetWatch();	
+			}
+		}
+		//Backward Direction
+		if(isWKeyDown == true) {
+			ctrl.drawString(150, 250, trigger, c);
+			if(time.isTimeUp()) {
+				currentSpriteIndex2  = currentSpriteIndex2 - 1;
+				if(currentSpriteIndex2 <= 0) {
+				currentSpriteIndex2 = sprites4.size() - 1;
+				} 
+				time.resetWatch();	
+			}	
+		}
+	
+	
+	
+	
 	}
 	
 	// Additional Static methods below...(if needed)

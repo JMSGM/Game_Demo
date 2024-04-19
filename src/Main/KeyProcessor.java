@@ -15,12 +15,12 @@ public class KeyProcessor{
 		if(key == ' '){
 			Main.isAKeyDown = false;
 			Main.isDKeyDown = false;
-			Main.isKeyDown = false;	
+			Main.isWKeyDown = false;	
+			Main.isSKeyDown = false;
 			return;
 			}
 		// Debounce routine below...
-		
-		
+			
 		if(key == last)
 			if(sw.isTimeUp() == false)			return;
 		last = key;
@@ -32,28 +32,54 @@ public class KeyProcessor{
 			System.exit(0);
 			break;
 		case 'a':
-			Main.isKeyDown = true;
+			Main.isWKeyDown = false;
 			Main.isAKeyDown = true;
+			Main.isSKeyDown = false;
+			Main.isDKeyDown = false;
+			
+			Main.wasWKeyDown = false;
 			Main.wasAKeyDown = true;
+			Main.wasSKeyDown = false;
 			Main.wasDKeyDown = false;
 			Main.trigger = "a is triggered";	
 			break;
 		case 'w':
-			Main.isKeyDown = true;
+			Main.isWKeyDown = true;
+			Main.isAKeyDown = false;
+			Main.isSKeyDown = false;
+			Main.isDKeyDown = false;
+			
+			Main.wasWKeyDown = true;
+			Main.wasAKeyDown = false;
+			Main.wasSKeyDown = false;
+			Main.wasDKeyDown = false;
 			Main.trigger = "w is triggered";
 			break;
 		case 's':
-			Main.isKeyDown = true;
+			Main.isWKeyDown = false;
+			Main.isAKeyDown = false;
+			Main.isSKeyDown = true;
+			Main.isDKeyDown = false;
+			
+			Main.wasWKeyDown = false;
+			Main.wasAKeyDown = false;
+			Main.wasSKeyDown = true;
+			Main.wasDKeyDown = false;
 			Main.trigger = "s is triggered";
 			break;
 		case 'd':
+			Main.isWKeyDown = false;
+			Main.isAKeyDown = false;
+			Main.isSKeyDown = false;
 			Main.isDKeyDown = true;
+			
+			Main.wasWKeyDown = false;
 			Main.wasAKeyDown = false;
+			Main.wasSKeyDown = false;
 			Main.wasDKeyDown = true;
 			Main.trigger = "d is triggered";
 			break;
 		case '$':
-			 Main.isKeyDown = true;
 			Main.trigger = "space is triggered";
 			break;
 		case 'm':

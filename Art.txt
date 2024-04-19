@@ -7,5 +7,10 @@ Art/LheadSprite1.png*Lf0
 Art/LheadSprite2.png*Lf1
 Art/LheadSprite3.png*Lf2
 Art/LheadSprite4.png*Lf3
-Art/headSprite.png*f
+Art/FheadSprite2.png*Ff1
+Art/FheadSprite3.png*Ff2
+Art/headSprite.png*Ff0
+Art/BheadSprite2.png*Bf1
+Art/BheadSprite3.png*Bf2
+Art/BheadSprite.png*Bf0
 Art/spaceBackground.png*drop
