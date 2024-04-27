@@ -14,7 +14,7 @@ import Data.spriteInfo;
 import FileIO.EZFileRead;
 import logic.Control;
 import timer.stopWatchX;
-
+import Data.Box;
 public class Main{
 	// Fields (Static) below...
 	//Misc
@@ -44,6 +44,8 @@ public class Main{
 	public static boolean wasDKeyDown = false;
 	public static boolean wasAKeyDown = false;
 	public static boolean wasSKeyDown = true;
+	//Box collider
+	public static ArrayList<Box> box = new ArrayList<>();
 	// End Static fields...
 	
 	public static void main(String[] args) {
@@ -54,7 +56,7 @@ public class Main{
 	/* This is your access to things BEFORE the game loop starts */
 	public static void start(){
 		
-		//Right walk
+		
 		for(int x = -100; x <= 1280; x += 32) {
             sprites.add(new spriteInfo(new Vector2D(x , 300), "f0"));
             sprites.add(new spriteInfo(new Vector2D(x + 8, 300), "f1"));
@@ -79,7 +81,16 @@ public class Main{
             sprites4.add(new spriteInfo(new Vector2D(300, y + 16), "Bf2"));
             sprites4.add(new spriteInfo(new Vector2D(300, y + 24), "Bf1"));
 		}
-		
+		//add box objects
+		box.add(new Box(0, 0, 1280, 720));
+		box.add(new Box(0, 642, 1280, 720));
+		box.add(new Box(0, 0, 64, 720));
+		box.add(new Box(1230, 0 , 1280, 720));
+		box.add(new Box(349, 147 , 374, 229));
+		Box topBorder = box.get(2);
+		Box vinny = box.get(4);
+		boolean r = hasCollided(vinny, topBorder);
+		System.out.println(r);
 		//Hashmap for in-game text
 		System.out.println(sprites.size());
 		for (int i = 0; i < ezr.getNumLines(); i++) {
@@ -165,9 +176,20 @@ public class Main{
 	
 	
 	
-	
 	}
 	
 	// Additional Static methods below...(if needed)
-
+	public static boolean hasCollided(Box b1, Box b2) {
+		if(b2.getX1() > b1.getX2())
+			return false;
+		if(b2.getX2() > b1.getX1())
+			return false;
+		if(b2.getY1() > b1.getY2())
+			return false;
+		if(b2.getY1() > b1.getY2())
+			return false;
+		
+		return true;
+		
+	}
 }
