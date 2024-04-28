@@ -21,7 +21,6 @@ public class Main{
 	public static Queue<Vector2D> vecs1 = new LinkedList<>();
 	public static Queue<Vector2D> vecs2 = new LinkedList<>();
 	public static Color c = new Color(44, 169, 222);
-	public static Vector2D currentVec = new Vector2D(-100, -100);
 	public static stopWatchX time = new stopWatchX(15);
 	//Where Sprite animation is stored
 	public static ArrayList<spriteInfo> sprites = new ArrayList<>();
@@ -40,12 +39,18 @@ public class Main{
 	public static boolean isAKeyDown = false;
 	public static boolean isSKeyDown = false;
 	
+	
+	
 	public static boolean wasWKeyDown = false;
 	public static boolean wasDKeyDown = false;
 	public static boolean wasAKeyDown = false;
 	public static boolean wasSKeyDown = true;
+	
+	
 	//Box collider
 	public static ArrayList<Box> box = new ArrayList<>();
+	public static Box vinBox = new Box(348, 147 , 374, 229);
+	public static boolean wasCollision;
 	// End Static fields...
 	
 	public static void main(String[] args) {
@@ -86,11 +91,10 @@ public class Main{
 		box.add(new Box(0, 642, 1280, 720));
 		box.add(new Box(0, 0, 64, 720));
 		box.add(new Box(1230, 0 , 1280, 720));
-		box.add(new Box(349, 147 , 374, 229));
-		Box topBorder = box.get(2);
-		Box vinny = box.get(4);
-		boolean r = hasCollided(vinny, topBorder);
-		System.out.println(r);
+		
+		
+
+
 		//Hashmap for in-game text
 		System.out.println(sprites.size());
 		for (int i = 0; i < ezr.getNumLines(); i++) {
@@ -108,16 +112,27 @@ public class Main{
 	public static void update(Control ctrl) {
 	
 		//Misc
+		wasCollision = hasCollided(vinBox, box.get(2));
+		int vinnyX = vinBox.getX1();
+		String vinnyBox = String.valueOf(wasCollision);
 		String vinnyLine = map.get("line2");
 		ctrl.addSpriteToFrontBuffer(0, 0, "drop");
 		ctrl.addSpriteToFrontBuffer(100, 100, "f1");
-		ctrl.drawString(970, 640, "Joseph Mathew Sagum", c);
+		ctrl.drawString(970, 640, vinnyBox, c);
 		ctrl.drawString(800, 250, vinnyLine, c);
 		spriteInfo si = sprites.get(currentSpriteIndex);
 		spriteInfo si2 = sprites2.get(currentSpriteIndex);
 		spriteInfo si3 = sprites3.get(currentSpriteIndex2);
 		spriteInfo si4 = sprites4.get(currentSpriteIndex2);
 		
+	    for(Box b: 	Main.box) {
+	        if(Main.wasCollision == true) {
+	        	
+	        	currentSpriteIndex++;
+	            Main.vinBox.adjustX(8);
+	        	break; 
+	        }		
+	    }
 
 		//input logic
 		if(wasWKeyDown == false && wasAKeyDown == false && wasSKeyDown == false && wasDKeyDown == true)
@@ -134,6 +149,7 @@ public class Main{
 		ctrl.drawString(150, 250, trigger, c);
 		if(time.isTimeUp()) {
 			currentSpriteIndex++;
+			vinBox.adjustX(8); 
 			if(currentSpriteIndex >= sprites.size()) {
 			currentSpriteIndex = 0;
 				} 
@@ -145,6 +161,7 @@ public class Main{
 			ctrl.drawString(150, 250, trigger, c);
 			if(time.isTimeUp()) {
 				currentSpriteIndex  = currentSpriteIndex - 1;
+				vinBox.adjustX(-8); 
 				if(currentSpriteIndex <= 0) {
 				currentSpriteIndex = sprites.size() - 1;
 				} 
@@ -156,6 +173,7 @@ public class Main{
 		ctrl.drawString(150, 250, trigger, c);
 		if(time.isTimeUp()) {
 			currentSpriteIndex2++;
+			vinBox.adjustY(8); 
 			if(currentSpriteIndex2 >= sprites3.size()-1) {
 			currentSpriteIndex2 = 0;
 			} 
@@ -167,24 +185,25 @@ public class Main{
 			ctrl.drawString(150, 250, trigger, c);
 			if(time.isTimeUp()) {
 				currentSpriteIndex2  = currentSpriteIndex2 - 1;
+				vinBox.adjustX(-8); 
 				if(currentSpriteIndex2 <= 0) {
 				currentSpriteIndex2 = sprites4.size() - 1;
 				} 
 				time.resetWatch();	
 			}	
 		}
-	
-	
-	
+
+		
+		
 	}
 	
-	// Additional Static methods below...(if needed)
+	// Additional Static methods below...
 	public static boolean hasCollided(Box b1, Box b2) {
 		if(b2.getX1() > b1.getX2())
 			return false;
-		if(b2.getX2() > b1.getX1())
+		if(b2.getX2() < b1.getX1())
 			return false;
-		if(b2.getY1() > b1.getY2())
+		if(b2.getY2() < b1.getY1())
 			return false;
 		if(b2.getY1() > b1.getY2())
 			return false;
