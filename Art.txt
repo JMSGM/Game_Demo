@@ -9,8 +9,12 @@ Art/LheadSprite3.png*Lf2
 Art/LheadSprite4.png*Lf3
 Art/FheadSprite2.png*Ff1
 Art/FheadSprite3.png*Ff2
+Art/FheadSprite4.png*Ff3
 Art/headSprite.png*Ff0
 Art/BheadSprite2.png*Bf1
 Art/BheadSprite3.png*Bf2
+Art/BheadSprite4.png*Bf3
 Art/BheadSprite.png*Bf0
 Art/spaceBackground.png*drop
+Art/StarNPC.png*NPC1
+Art/StarNPC2.png*NPC2

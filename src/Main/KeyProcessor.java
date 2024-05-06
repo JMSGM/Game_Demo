@@ -34,14 +34,11 @@ public class KeyProcessor{
 			System.exit(0);
 			break;
 		case 'a':
-			
-
 			Main.isWKeyDown = false;
 			Main.isAKeyDown =  true;
 			Main.isSKeyDown = false;
 			Main.isDKeyDown = false;	
 				
-			
 			Main.wasWKeyDown = false;
 			Main.wasAKeyDown =  true;
 			Main.wasSKeyDown = false;
@@ -53,7 +50,6 @@ public class KeyProcessor{
 			Main.isAKeyDown = false;
 			Main.isSKeyDown = false;
 			Main.isDKeyDown = false;
-			
 			
 			Main.wasWKeyDown =  true;
 			Main.wasAKeyDown = false;
@@ -74,8 +70,6 @@ public class KeyProcessor{
 			Main.trigger = "s is triggered";
 			break;
 		case 'd':
-		
-			
 			Main.isWKeyDown = false;
 			Main.isAKeyDown = false;
 			Main.isSKeyDown = false;
@@ -88,7 +82,7 @@ public class KeyProcessor{
 			Main.trigger = "d is triggered";
 			break;
 		case '$':
-			Main.trigger = "space is triggered";
+			Main.wasSpKeyDown = true;
 			break;
 		case 'm':
 			// For mouse coordinates

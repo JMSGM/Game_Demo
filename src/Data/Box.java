@@ -35,5 +35,17 @@ private int x1, y1, x2, y2;
 		this.y1 += y;
 		this.y2 += y;
 	}
-
+	public static boolean hasCollided(Box b1, Box b2) {
+		if(b2.getX1() > b1.getX2())
+			return false;
+		if(b2.getX2() < b1.getX1())
+			return false;
+		if(b2.getY2() < b1.getY1())
+			return false;
+		if(b2.getY1() > b1.getY2())
+			return false;
+		
+		return true;
+		
+	}
 }
